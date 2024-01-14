@@ -48,7 +48,8 @@ pipeline{
                 script {
                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
                     sh "docker images ${IMAGE_NAME}"
-                    // sh "docker rmi ${IMAGE_NAME}:latest"
+                    sh "docker rmi ${IMAGE_NAME}:latest"
+                    sh "docker images ${IMAGE_NAME}"
                 }
             }
         }
