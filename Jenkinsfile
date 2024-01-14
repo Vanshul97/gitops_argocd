@@ -47,24 +47,23 @@ pipeline{
             steps {
                 script {
                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-                    sh "docker images ${IMAGE_NAME}"
-                    sh "docker rmi ${IMAGE_NAME}:latest"
-                    sh "docker images ${IMAGE_NAME}"
+                    // sh "docker rmi ${IMAGE_NAME}:latest"
+                    
                 }
             }
         }
-        // stage('Update Kubenertes Deployment file') {
-        //     steps {
-        //         script {
-        //             sh """
-        //             cat deployment.yml
-        //             sed -i "s/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g" deployment.yml
-        //             cat deployment.yml
-        //             """
+        stage('Update Kubenertes Deployment file') {
+            steps {
+                script {
+                    sh """
+                    cat deployment.yml
+                    sed -i "s/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g" deployment.yml
+                    cat deployment.yml
+                    """
                     
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
     }
 }
 //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
