@@ -26,6 +26,23 @@ pipeline{
                 }
             }
         }
+        stage('Build docker image'){
+            steps{
+                script{
+                    docker_image=docker.build "${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
+        stage('Push Docker Image to DockerHub'){
+            steps{
+                script{
+                    docker.withRegistry('https://registry.hub.docker.com',REGISTRY_CREDS){
+                        docker_image.push("$BUILD_NUMBER")
+                        docker_image.push('latest')
+                    }
+                }
+            }
+        }
     }
 }
 //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
